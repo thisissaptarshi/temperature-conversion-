@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature conversion</title>
+</head>
+<style>
+    body{
+        background-color: lightyellow;
+    }
+    .container{
+        text-align: center;
+        background-color: lightsalmon;
+        height: 300px;
+        /* margin-top: 200px; */
+        width: 700px;
+        margin-left: 80px;
+        border-radius: 20px;
+        box-shadow: 5px 5px black;
+    }
+    #heading{
+        font-size: 45px;
+        font-weight: bold;
+        padding-top: 10px;
+    }
+    #temp_cal{
+        height: 30px;
+        width: 90px;
+    }
+    #temp{
+        height: 25px;
+        width: 70px;
+    }
+    #sub{
+        margin-top: 30px;
+        height: 30px;
+        width: 90px;
+        background-color: white;
+        color: black;
+        border-radius: 7px;
+        /* box-shadow: 2px 2px white; */
+        font-size: 20px;
+    }
+    #input_field{
+        /* margin-top: 20px; */
+        
+        font-size: 30px;
+    }
+</style>
+<body>
+    <div class="container">
+        <form id="Temperature" onsubmit="tempConversion(); return false">
+            <h2 id="heading">Temperature Conversion Scale</h2>
+            <input type="number" name="temp" id="temp">
+            <select name="temp_cal" id="temp_cal">
+                <option value="cel">°Celsius</option>
+                <option value="feh">°Fahrenheit</option>
+            </select><br/>
+            <input type="submit" id="sub"><br/>
+            <h3 id="input_field"></h3>
+        </form>
+    </div>
+
+    <script>
+        const tempConversion = () =>{
+            const temp = document.getElementById("temp").value;
+            const temp_cal = document.getElementById("temp_cal").value;
+
+
+            const calToFeh = (cel) =>{
+                let fehrenheit = Math.round((cel*9/5 + 32));
+                return fehrenheit;
+            }
+
+            const FehToCal = (feh) =>{
+                let Celsius = Math.round(((feh - 32)*5/9));
+                return Celsius;
+            }
+
+            let result;
+            if(temp_cal=='cel')
+            {
+                result = calToFeh(temp);
+                document.getElementById("input_field").innerHTML = `= ${result} °Fahrenheit`;
+            }
+            else
+            {
+                result = FehToCal(temp);
+                document.getElementById("input_field").innerHTML = `= ${result} °Celsius`;
+            }
+
+        }
+    </script>
+</body>
+</html>
